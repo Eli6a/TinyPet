@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Créer une pétition</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+
+<script src="https://unpkg.com/mithril/mithril.js"></script>
+
+</head>
+<body>
+
+<script>	
+ 
+// Petition
+
+var Petition={
+	petitionTitle : "",
+	userName : "",
+	body : "",
+	tags : [],
+
+  save: function() {
+	console.log("saving...",Petition.current)
+	        return m.request({
+	            method: "GET",
+	            url: "_ah/api/myApi/v1/petition/"+petitionTitle+"/"+userName+"/"+body+"/"+tags
+	        })
+	        .then(function(result) {
+	        	console.log("got:",result)
+	        })
+   }
+ } 
+
+ var PetitionView = {
+    view: function() {
+        return m('div', [
+            m('div', { class: 'subtitle' }, "Petition Details"),
+            m("input[type=text][placeholder=Title]", {
+                value: Petition.petitionTitle,
+                class: 'input is-rounded',
+                oninput: function(e) {
+                    Petition.petitionTitle = e.target.value;
+                },
+            }),
+            m("input[type=text][placeholder=Username]", {
+                value: Petition.userName,
+                class: 'input is-rounded',
+                oninput: function(e) {
+                    Petition.userName = e.target.value;
+                },
+            }),
+            m("textarea[placeholder=Body]", {
+                value: Petition.body,
+                class: 'textarea',
+                oninput: function(e) {
+                    Petition.body = e.target.value;
+                },
+            }),
+            m('div', [
+                m('label', { class: 'label' }, "Tags:"),
+                Petition.tags.map(function(tag, index) {
+                    return m("input[type=text][placeholder=Tag]", {
+                        value: tag,
+                        class: 'input is-rounded',
+                        oninput: function(e) {
+                            Petition.tags[index] = e.target.value;
+                        },
+                    });
+                }),
+                m("button", {
+                    class: 'button is-link',
+                    onclick: function(e) {
+                        Petition.tags.push(""); // Ajouter un nouvel élément à la liste des tags
+                    },
+                }, "Add Tag"),
+            ]),
+            m('button', {
+                class: 'button is-link',
+                onclick: function(e) {
+                    // Ajoutez ici la logique pour enregistrer ou modifier la pétition
+                    console.log('Petition details updated:', Petition);
+                },
+            }, "Save"),
+        ]);
+    },
+};
+
+m.mount(document.body, PetitionView)	
+
+</script>
+</body>
+</html>

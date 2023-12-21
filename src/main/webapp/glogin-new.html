@@ -1,20 +1,27 @@
 <html lang="en">
-  <body>
+  <head> 
+    <meta charset="utf-8">
+    <title>Connexion Google</title>
     <script src="https://unpkg.com/jwt-decode@3.1.2/build/jwt-decode.js"></script>
     <script src="https://accounts.google.com/gsi/client" async="" defer=""></script>    
-    <div id="g_id_onload"     
-        data-client_id="342296679137-k0ae0p329shp6tcj6k3r2d3khuo7cjq9.apps.googleusercontent.com"
-        data-callback="handleCredentialResponse">
-    </div>
-    <div class="g_id_signin" data-type="standard"></div>
+  </head>
+  <body>
+    <header>
+      <h1>TinyPet</h1>
+    </header>
 
-    <p id="toto"></p> 
+    <div class="g_id_signin" data-type="standard">
+      <div id="g_id_onload"     
+      data-client_id="342296679137-k0ae0p329shp6tcj6k3r2d3khuo7cjq9.apps.googleusercontent.com"
+      data-callback="handleCredentialResponse">
+      </div>
+    </div>
+
+    <div id="toto"></div>
 
     <script>
     function handleCredentialResponse(response) {
         console.log("callback called:"+response.credential)
-        // decodeJwtResponse() is a custom function defined by you
-        // to decode the credential response.
         const responsePayload = jwt_decode(response.credential);
    
         console.log("ID: " + responsePayload.sub);
@@ -24,10 +31,10 @@
         console.log("Image URL: " + responsePayload.picture);
         console.log("Email: " + responsePayload.email);
 
+        sessionStorage.setItem("userCredential", response.credential);
+        sessionStorage.setItem("userName", responsePayload.name);
 
-        const url = "_ah/api/myApi/v1/Hello"+'?access_token=' + response.credential
-        
-        fetch(url).then(response => response.text()).then(data => document.getElementById('toto').innerHTML = data)
+        window.location.href = "homePage.html";
      }
     </script>
     

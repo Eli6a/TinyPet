@@ -91,7 +91,7 @@ public class PetitionServlet extends HttpServlet {
         // }
 	}
 
-	public Entity addScore(@Named("title") String title, @Named("owner") String owner, @Named("body") String body, @Named("tags") List<String> tags) {
+	public Entity addPetition(@Named("title") String title, @Named("owner") String owner, @Named("body") String body, @Named("tags") List<String> tags) {
 		
 		// Create petition
 		Random r = new Random();

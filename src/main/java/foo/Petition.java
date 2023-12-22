@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Petition {
 	
-	public String title;
+		public String title;
 	public String url;
 	public String owner;
 	public String body;

@@ -1,61 +1,166 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-<head>
-<meta http-equiv="content-type"
-	content="application/xhtml+xml; charset=UTF-8" />
-<title>Hello App Engine</title>
-</head>
-
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Créer une pétition</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="style.css">
+        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+        <script src="https://unpkg.com/mithril/mithril.js"></script>
+    </head>
+    
 <body>
-	<h1>Web and Cloud</h1>
+    <div class="main-container">
+        <script>	
+        
+        var PetitionModel = {
+                    list: [
+                    {'title': 'Save the Rainforests',
+   'username': 'nature_lover',
+   'body': 'Help us protect the rainforests...',
+   'tags': ['environment', 'forests']},
+  {'title': 'More Bike Lanes',
+   'username': 'city_cyclist',
+   'body': 'We need safer bike lanes in the city...',
+   'tags': ['urban', 'cycling']},
+  {'title': 'Petition Title 3',
+   'username': 'user3',
+   'body': 'This is the body of petition 3.',
+   'tags': ['tag3', 'tag4']},
+  {'title': 'Petition Title 4',
+   'username': 'user4',
+   'body': 'This is the body of petition 4.',
+   'tags': ['tag4', 'tag5']},
+  {'title': 'Petition Title 5',
+   'username': 'user5',
+   'body': 'This is the body of petition 5.',
+   'tags': ['tag0', 'tag1']},
+  {'title': 'Petition Title 6',
+   'username': 'user6',
+   'body': 'This is the body of petition 6.',
+   'tags': ['tag1', 'tag2']},
+  {'title': 'Petition Title 7',
+   'username': 'user7',
+   'body': 'This is the body of petition 7.',
+   'tags': ['tag2', 'tag3']},
+  {'title': 'Petition Title 8',
+   'username': 'user8',
+   'body': 'This is the body of petition 8.',
+   'tags': ['tag3', 'tag4']},
+  {'title': 'Petition Title 9',
+   'username': 'user9',
+   'body': 'This is the body of petition 9.',
+   'tags': ['tag4', 'tag5']},
+  {'title': 'Petition Title 10',
+   'username': 'user10',
+   'body': 'This is the body of petition 10.',
+   'tags': ['tag0', 'tag1']},
+  {'title': 'Petition Title 11',
+   'username': 'user11',
+   'body': 'This is the body of petition 11.',
+   'tags': ['tag1', 'tag2']},
+  {'title': 'Petition Title 12',
+   'username': 'user12',
+   'body': 'This is the body of petition 12.',
+   'tags': ['tag2', 'tag3']},
+  {'title': 'Petition Title 13',
+   'username': 'user13',
+   'body': 'This is the body of petition 13.',
+   'tags': ['tag3', 'tag4']},
+  {'title': 'Petition Title 14',
+   'username': 'user14',
+   'body': 'This is the body of petition 14.',
+   'tags': ['tag4', 'tag5']},
+  {'title': 'Petition Title 15',
+   'username': 'user15',
+   'body': 'This is the body of petition 15.',
+   'tags': ['tag0', 'tag1']},
+  {'title': 'Petition Title 16',
+   'username': 'user16',
+   'body': 'This is the body of petition 16.',
+   'tags': ['tag1', 'tag2']},
+  {'title': 'Petition Title 17',
+   'username': 'user17',
+   'body': 'This is the body of petition 17.',
+   'tags': ['tag2', 'tag3']},
+  {'title': 'Petition Title 18',
+   'username': 'user18',
+   'body': 'This is the body of petition 18.',
+   'tags': ['tag3', 'tag4']},
+  {'title': 'Petition Title 19',
+   'username': 'user19',
+   'body': 'This is the body of petition 19.',
+   'tags': ['tag4', 'tag5']},
+  {'title': 'Petition Title 20',
+   'username': 'user20',
+   'body': 'This is the body of petition 20.',
+   'tags': ['tag0', 'tag1']},
+  {'title': 'Petition Title 21',
+   'username': 'user21',
+   'body': 'This is the body of petition 21.',
+   'tags': ['tag1', 'tag2']},
+  {'title': 'Petition Title 22',
+   'username': 'user22',
+   'body': 'This is the body of petition 22.',
+   'tags': ['tag2', 'tag3']},
+  {'title': 'Petition for Action 23',
+   'username': 'user200',
+   'body': 'We are petitioning to address issue 23 because...',
+   'tags': ['issue5', 'issue0']},
+  {'title': 'Petition Title 12',
+   'username': 'user12',
+   'body': 'This is the body of petition 12.',
+   'tags': ['tag2', 'tag3']},
+  {'title': 'Petition Title 12',
+   'username': 'user12',
+   'body': 'This is the body of petition 12.',
+   'tags': ['tag2', 'tag3']},
+  {'title': 'Petition Title 12',
+   'username': 'user12',
+   'body': 'This is the body of petition 12.',
+   'tags': ['tag2', 'tag3']},
+  {'title': 'Petition Title 12',
+   'username': 'user12',
+   'body': 'This is the body of petition 12.',
+   'tags': ['tag2', 'tag3']},
+  {'title': 'Petition Title 12',
+   'username': 'user12',
+   'body': 'This is the body of petition 12.',
+   'tags': ['tag2', 'tag3']},
+  {'title': 'Petition Title 12',
+   'username': 'user12',
+   'body': 'This is the body of petition 12.',
+   'tags': ['tag2', 'tag3']},
+  {'title': 'Petition Title 12',
+   'username': 'user12',
+   'body': 'This is the body of petition 12.',
+   'tags': ['tag2', 'tag3']}
+                    ]
+        };
+                
+                var Petition = {
+                    view: function(vnode) {
+                        var petition = vnode.attrs.petition;
+                        return m("div.petition", [
+                            m("h3", petition.title),
+                            m("p", { class: "username" }, `By: ${petition.username}`),
+                            m("p", { class: "body" }, petition.body),
+                            m("div.tags", petition.tags.map(tag => m("span.tag", tag)))
+                        ]);
+                    }
+                };
+                var PetitionsList = {
+                view: function() {
+                        return m("div.petitions-list", 
+                            PetitionModel.list.map(petition => m(Petition, { petition }))
+                        );
+                }
+                };
 
-Be sure you loaded this page with "https://"
+                m.mount(document.body, PetitionsList);
 
-<h2>Check if it works</h2>
-	<li><a href='/hello'>The servlet Hello world</a>
-	
-<h2>Check login Google</h2>	
-	<li><a href="https://developers.google.com/identity/sign-in/web/sign-in#before_you_begin">see docs</a>
-	<li><a href='/userapi'>Login with Google (servlet)</a>
-	<li><a href='/glogin-new.html'>Login with Google (javascript new)</a>
-	
-	
-<h2>Simple Javascript to call Rest Interface</h2>
-	<li><a href='/_ah/api/myApi/v1/topscores'>REST Call topscores</a>
-	<li><a href='/index3.html'>Scores with Mithril</a>
-	<li><a href='/index2.html'>Scores with React</a>
-
-<h2>Understanding contention with counters</h2>
-	<li><a href='/count'>Counter no transaction</a>
-	<li><a href='/counttr'>Counter with transactions</a>
-	<li><a href='/countsh'>Sharded Counter with transactions</a>
-
-
-<h2>Data Queries for managing Friends</h2>	
-	<li><a href='/friends'>Populate the Friend table (long)</a>
-	<li><a href='/query'>Query the Friend table</a>
-	
-<h2>Data Queries for managing Posts</h2>	
-	<li><a href='/prefixclean'>clean post data (long)</a>
-	<li><a href='/prefix'>install post data (long)</a>
-	<li><a href='/prefixquery'>Raw queries on post data</a>
-    <li><a href='/post.html'>Unsecure MyPost</a>
-    <li><a href='/glogin-mithril.html'>Secure MyPost</a>
-	<li><a href='/MsgIndex'>Msg - MsgIndex - Key/Parent Key</a>
-	
-<h2>Data Queries for managing Petitions</h2>	
-	<li><a href='/petition'>install petition like data (long)</a>
-	<li><a href='/pquery'>query petition data</a>
-			
-
-<h1>Fetch scores below:</h1>
-
-
-		<p id="toto"></p> <script>
-    const url = "_ah/api/myApi/v1/topscores"
-    fetch(url)
-    .then(response => response.text())
-    .then(data => document.getElementById('toto').innerHTML = data)
-  </script>
+        </script>
+    </div>
 </body>
 </html>

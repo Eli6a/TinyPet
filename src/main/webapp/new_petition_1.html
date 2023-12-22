@@ -1,21 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <title>Créer une pétition</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">        
+        <link rel="stylesheet" href="style.css">
+
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
         <script src="https://unpkg.com/mithril/mithril.js"></script>
     </head>
-    
-<body>
+    <body>
     <div class="main-container">
         <script>	
         
         // Petition
 
-        var Petition={
+        var Petition = {
         url:"",
         petitionTitle: "",
         userName: "",
@@ -32,12 +34,12 @@
  					'tags':Petition.tags
                 }
  	    	console.log("post:"+data)
-             return m.request({
+            return m.request({
          		method: "POST",
          		url: "_ah/api/myApi/v1/addPetition",
              	body: data,
-         	}).then(function() {
-                window.location.href = "hello";
+            }).then(function() {
+                window.location.href = "success_petition.html";
          	})
         }
         } 
@@ -46,33 +48,33 @@
             view: function() {
                 return m('div', [
                     m('div', { class: 'header' }, [
-                        m('div', { class: 'subtitle' }, "Petition Details")
+                        m('div', { class: 'subtitle' }, "Pétition")
                     ]),
                     m('div', { class: 'form-inputs' }, [
                         m('div', { class: 'input-field' }, [
                             m("input[type=text][placeholder=Title]", {
-                                value: Petition.getPetitionTitle,
+                                value: Petition.petitionTitle,
                                 class: 'input is-rounded',
                                 oninput: function(e) {
-                                    Petition.getPetitionTitle = e.target.value;
+                                    Petition.petitionTitle = e.target.value;
                                 },
                             }),
                         ]),
                         m('div', { class: 'input-field' }, [
                             m("input[type=text][placeholder=Username]", {
-                                value: Petition.getUserName,
+                                value: Petition.userName,
                                 class: 'input is-rounded',
                                 oninput: function(e) {
-                                    Petition.getUserName = e.target.value;
+                                    Petition.userName = e.target.value;
                                 },
                             }),
                         ]),
                         m('div', { class: 'textarea-field' }, [
                             m("textarea[placeholder=Body]", {
-                                value: Petition.getBody,
+                                value: Petition.body,
                                 class: 'textarea',
                                 oninput: function(e) {
-                                    Petition.getBody = e.target.value;
+                                    Petition.body = e.target.value;
                                 },
                             }),
                         ])
@@ -91,18 +93,16 @@
                         m("button", {
                             class: 'button is-link',
                             onclick: function(e) {
-                                Petition.tags.push(""); // Add a new element to the tags list
+                                Petition.tags.push(""); 
                             },
-                        }, "Add Tag"),
+                        }, "Ajouter un tag"),
                     ]),
                     m('div', { class: 'submit-section' }, [
                         m('button', {
                             class: 'button is-link',
                             onclick: function(e) {
-                                // Add logic here to save or update the petition
-                                console.log('Petition details updated:', Petition);
-                            },
-                        }, "Save"),
+                                Petition.save();                            },
+                        }, "Ajouter la pétition"),
                     ]),
                 ]);
             },
@@ -111,121 +111,6 @@
         m.mount(document.body, PetitionView);
 
         </script>
-
-        <style>
-            /* Custom CSS to override Bootstrap styles */
-
-            /* General Styling */
-            body {
-                padding: 20px;
-            }
-
-            /* Header Styling */
-            .header {
-                margin-bottom: 20px;
-            }
-
-            .subtitle {
-                font-size: 1.5rem;
-                font-weight: bold;
-                text-align: center;
-                margin-bottom: 15px;
-            }
-
-            /* Form Inputs Styling */
-            .form-inputs {
-                margin-bottom: 20px;
-            }
-
-            .input-field,
-            .textarea-field {
-                margin-bottom: 15px;
-            }
-
-            .input.is-rounded,
-            .textarea {
-                width: 100%;
-                box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-            }
-
-            /* Tags Section Styling */
-            .tags-section {
-                margin-bottom: 20px;
-            }
-
-            .label {
-                display: block;
-                margin-bottom: 10px;
-            }
-
-            .input.is-rounded {
-                margin-right: 10px;
-                margin-bottom: 10px;
-            }
-
-            /* Submit Section Styling */
-            .submit-section {
-                text-align: center;
-            }
-
-            .button.is-link {
-                background-color: #007bff;
-                color: white;
-                border-radius: 20px;
-                padding: 10px 20px;
-                font-size: 1rem;
-                border: none;
-                cursor: pointer;
-                transition: background-color 0.3s;
-            }
-
-            .button.is-link:hover {
-                background-color: #0056b3;
-            }
-
-            /*petition page*/
-
-            .petitions-list {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-around;
-            }
-
-            .petition {
-                border: 1px solid #ddd;
-                border-radius: 10px;
-                padding: 15px;
-                margin: 10px;
-                width: 300px;
-                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            }
-
-            .petition h3 {
-                color: #333;
-                margin-bottom: 5px;
-            }
-
-            .username {
-                font-style: italic;
-                color: #666;
-            }
-
-            .body {
-                margin-top: 10px;
-                margin-bottom: 10px;
-            }
-
-            .tag {
-                display: inline-block;
-                background: #007bff;
-                color: white;
-                padding: 3px 8px;
-                border-radius: 15px;
-                margin-right: 5px;
-                font-size: 0.8em;
-            }
-
-        </style>
     </div>
 </body>
 </html>

@@ -5,6 +5,7 @@
     <title>Créer une pétition</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script src="https://unpkg.com/mithril/mithril.js"></script>
@@ -15,21 +16,51 @@
     var Petition = {
         url:"",
         petitionTitle: "",
-        userName: "",
+        owner: "",
         body: "",
         tags: [],
 
-        save: function() {
+        save: function() {            
+            // si pas connecté, renvoie à la page de connexion d'abord
+            console.log(sessionStorage.getItem("userName"))
+            if (sessionStorage.getItem("userName") == null){
+                sessionStorage.setItem("tempPetition", JSON.stringify({
+                    petitionTitle: Petition.petitionTitle,
+                    url: Petition.url,
+                    body: Petition.body,
+                    date: Petition.date,
+                    signature: 0,
+                    tags: Petition.tags
+                }));
+                window.location.href = "glogin_new.html";
+                return;
+            }
+
+            // si on vient d'une redirection vers la connexion
+            if (sessionStorage.getItem("tempPetition") != null) {
+                var tempPetition = JSON.parse(sessionStorage.getItem("tempPetition"));
+                if (tempPetition) {
+                    Petition.petitionTitle = tempPetition.petitionTitle;
+                    Petition.url = tempPetition.url;
+                    Petition.body = tempPetition.body;
+                    Petition.date = tempPetition.date;
+                    Petition.tags = tempPetition.tags;
+                    
+                    // Supprimer les valeurs temporaires après utilisation
+                    sessionStorage.removeItem("tempPetition");
+                }
+            }
+
  			var data={'title':Petition.petitionTitle,
  					'url':Petition.url,
- 					'owner':Petition.userName,
+ 					'owner':sessionStorage.getItem("userName"),
  					'body':Petition.body,
  					'date':Petition.date,
  					'signature': 0,
  					'tags':Petition.tags
-                }
+            }
  	    	console.log("post:"+data)
-             return m.request({
+            return m.request({
          		method: "POST",
          		url: "_ah/api/myApi/v1/addPetition",
              	body: data,
@@ -51,13 +82,6 @@
                     class: 'input is-rounded',
                     oninput: function (e) {
                         Petition.petitionTitle = e.target.value;
-                    },
-                }),
-                m("input[type=text][placeholder=Username]", {
-                    value: Petition.userName,
-                    class: 'input is-rounded',
-                    oninput: function (e) {
-                        Petition.userName = e.target.value;
                     },
                 }),
                 m("textarea[placeholder=Body]", {
@@ -83,7 +107,7 @@
                         onclick: function (e) {
                             Petition.tags.push(""); // Ajouter un nouvel élément à la liste des tags
                         },
-                    }, "Add Tag"),
+                    }, "Ajouter un tag"),
                 ]),
                 m('button', {
                     class: 'button is-link',
@@ -91,7 +115,7 @@
                         Petition.save();
                         console.log('Petition details updated:', Petition);
                     },
-                }, "Save"),
+                }, "Ajouter la pétition"),
             ]);
         },
     };

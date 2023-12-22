@@ -52,9 +52,7 @@ public class UsersServlet extends HttpServlet {
                  + userService.createLogoutURL(thisUrl)
                  + "\">sign out</a>.</p>");
    } else {
-     resp.getWriter()
-         .println(
-             "<p>Please <a href=\"" + userService.createLoginURL(thisUrl) + "\">sign in</a>.</p>");
+     resp.sendRedirect("glogin-new.html");
    }
  }
 }

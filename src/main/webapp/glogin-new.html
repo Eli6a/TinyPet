@@ -10,32 +10,77 @@
       <h1>TinyPet</h1>
     </header>
 
-    <div class="g_id_signin" data-type="standard">
+    <div class="g_id_signin" data-type="standard" onload="checkConnection">
       <div id="g_id_onload"     
       data-client_id="342296679137-k0ae0p329shp6tcj6k3r2d3khuo7cjq9.apps.googleusercontent.com"
       data-callback="handleCredentialResponse">
       </div>
     </div>
 
-    <div id="toto"></div>
-
     <script>
+      
+    function handleLogoutResponse(){
+        sessionStorage.removeItem("userCredential");
+        sessionStorage.removeItem("userName");
+        gapi.auth2.getAuthInstance().disconnect();
+    }
+
     function handleCredentialResponse(response) {
-        console.log("callback called:"+response.credential)
-        const responsePayload = jwt_decode(response.credential);
-   
-        console.log("ID: " + responsePayload.sub);
-        console.log('Full Name: ' + responsePayload.name);
-        console.log('Given Name: ' + responsePayload.given_name);
-        console.log('Family Name: ' + responsePayload.family_name);
-        console.log("Image URL: " + responsePayload.picture);
-        console.log("Email: " + responsePayload.email);
+      console.log("callback called:"+response.credential)
+      const responsePayload = jwt_decode(response.credential);
+  
+      console.log("ID: " + responsePayload.sub);
+      console.log('Full Name: ' + responsePayload.name);
+      console.log('Given Name: ' + responsePayload.given_name);
+      console.log('Family Name: ' + responsePayload.family_name);
+      console.log("Image URL: " + responsePayload.picture);
+      console.log("Email: " + responsePayload.email);
 
-        sessionStorage.setItem("userCredential", response.credential);
-        sessionStorage.setItem("userName", responsePayload.name);
+      sessionStorage.setItem("userCredential", response.credential);
+      sessionStorage.setItem("userName", responsePayload.name);
 
-        window.location.href = "homePage.html";
+      redirect();
      }
+
+     function checkConnection(){
+      print(sessionStorage.getItem("userCredential") )
+      if (sessionStorage.getItem("userCredential") != null){
+        redirect();
+      }
+     }
+
+     function redirect(){
+      var previousPage = document.referrer;
+      console.log(previousPage);
+      console.log(window.location.href)
+
+      if (!isSameDomain(window.location.href, previousPage)){
+        window.location.href = "homePage.html";
+      }
+      else {
+        if (previousPage.endsWith("/new_petition.html")){
+            window.location.href = "new_petition.html";
+        }
+        else {
+          window.location.href = "homePage.html";
+        }
+      }  
+     }
+
+     function isSameDomain(url1, url2) {
+          function extractDomain(url) {
+              var domain;
+              if (url.indexOf("://") > -1) {
+                  domain = url.split('/')[2];
+              } else {
+                  domain = url.split('/')[0];
+              }
+              return domain.split(':')[0];
+          }
+
+          return extractDomain(url1) === extractDomain(url2);
+      }
+
     </script>
     
 

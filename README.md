@@ -1,94 +1,17 @@
-# fast install
+# Rapport
 
-* precondition: you have a GCP project selected with billing activated. 
-* go to GCP console and open a cloud shell
-* git clone https://github.com/momo54/webandcloud.git
-* cd webandcloud
-* mvn appengine:deploy (to deploy)
-* mvn appengine:run (to debug in dev server)
+Nous avons repris le code de [webandcloud](https://github.com/momo54/webandcloud) que nous avons modifié. 
+Au niveau du backend, le code a été majoritairement ajouté dans la classe ScoreEndpoint, nous avons ajouté une classe Petition ainsi que UserP que nous n'utilisons pas encore.
+Pour le frontend, les pages [new_petition.html](https://donneesmassives-402312.ew.r.appspot.com/new_petition.html) et [success_petition.html](https://donneesmassives-402312.ew.r.appspot.com/success_petition.html) ont été ajoutées, et la page [index.html](https://donneesmassives-402312.ew.r.appspot.com/index.html) a été renommé en [index1.html](https://donneesmassives-402312.ew.r.appspot.com/index1.html) afin de mettre la page qui aurait dû afficher les pétitions de notre base de données.
+Cependant, nous avons oublié d'ajouter le lien vers la page [new_petition.html](https://donneesmassives-402312.ew.r.appspot.com/new_petition.html).
 
-# webandcloud from the lab
+## Ce qui a été implémenté
+Nous avons réussi à faire en sorte de pouvoir se connecter avec son compte google et de pouvoir ajouter des pétitions avec son nom de google. Lorsque la personne n'est pas connectée, elle est redirigée vers l'interface de connexion, puis sa pétition est enregistrée.
 
-**Be sure your maven has access to the web**
-* you should have file ~/.m2/settings.xml
-* otherwise cp ~molli-p/.m2/settings.xml ~/.m2/
+## Ce qui n'a pas été implémenté
+Nous avons écrit le code pour signer une pétition, ajouter un utilisateur et vérifier si on l'a dans la base de donnée, mais comme nous n'avons pas réussi à faire fonctionner ce code, ce qui nous a contraint à commenter tout cela pour ne pas impacter ce qui fonctionne.
 
-```
-molli-p@remote:~/.m2$ cat settings.xml
-<settings>
- <proxies>
- <proxy>
-      <active>true</active>
-      <protocol>https</protocol>
-      <host>proxy.ensinfo.sciences.univ-nantes.prive</host>
-      <port>3128</port>
-    </proxy>
-  </proxies>
-</settings>
-```
+## Ce qui a été pensé
+Les clés des pétitions (et des utilisateurs) ont été salé par un random de taille 8 pour éviter d'écrire au même endroit, et donc un hotspot. 
 
-## import and run in eclipse
-* install the code in your home:
-```
- cd ~
- git clone https://github.com/momo54/webandcloud.git
- cd webandcloud
- mvn install
-```
-* Change "sobike44" with your google project ID in pom.xml
-* Change "sobike44" with your google project ID in src/main/webapp/WEB-INF/appengine-web.xml
-
-## Run in eclipse
-
-* start an eclipse with gcloud plugin
-```
- /media/Enseignant/eclipse/eclipse
- or ~molli-p/eclipse/eclipse
- ```
-* import the maven project in eclipse
- * File/import/maven/existing maven project
- * browse to ~/webandcloud
- * select pom.xml
- * Finish and wait
- * Ready to deploy and run...
- ```
- gcloud app create error...
- ```
- Go to google cloud shell console (icon near your head in google console)
- ```
- gcloud app create
- ```
-
-
-## Install and Run 
-* (gcloud SDK must be installed first. see https://cloud.google.com/sdk/install)
- * the gcloud command should be in your path. Run the following command to initialize your local install of gcloud.
-```
-gcloud init
-```
-* git clone https://github.com/momo54/webandcloud.git
-* cd webandcloud
-* running local (http://localhost:8080):
-```
-mvn package
-mvn appengine:run
-```
-* Deploying at Google (need gcloud configuration, see error message -> tell you what to do... 
-)
-```
-mvn appengine:deploy
-gcloud app browse
-```
-
-# Access REST API
-* (worked before) 
-```
-https://<yourapp>.appstpot.com/_ah/api/explorer
-```
-* New version of endpoints (see https://cloud.google.com/endpoints/docs/frameworks/java/adding-api-management?hl=fr):
-```
-mvn clean package
-mvn endpoints-framework:openApiDocs
-gcloud endpoints services deploy target/openapi-docs/openapi.json 
-mvn appengine:deploy
-```
+Pour pouvoir lister les pétitions signées par l'utilisateur, nous voulions stocker les identifiants des pétitions dans une liste signedPetition dans l'entité utilisateur et de seulement incrémenter le nombre de signature dans l'entité pétition. Nous voulions aussi incrémenter le nombre au niveau du frontend sans que la valeur ne soit forcément mise à jour immédiatement, en mettant un Thread.sleep() pour éviter un hotspot tout en donnant l'illusion que l'incrémentation se fasse instantanément. 

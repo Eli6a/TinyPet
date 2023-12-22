@@ -15,3 +15,7 @@ Nous avons écrit le code pour signer une pétition, ajouter un utilisateur et v
 Les clés des pétitions (et des utilisateurs) ont été salé par un random de taille 8 pour éviter d'écrire au même endroit, et donc un hotspot. 
 
 Pour pouvoir lister les pétitions signées par l'utilisateur, nous voulions stocker les identifiants des pétitions dans une liste signedPetition dans l'entité utilisateur et de seulement incrémenter le nombre de signature dans l'entité pétition. Nous voulions aussi incrémenter le nombre au niveau du frontend sans que la valeur ne soit forcément mise à jour immédiatement, en mettant un Thread.sleep() pour éviter un hotspot tout en donnant l'illusion que l'incrémentation se fasse instantanément. 
+
+![image](https://github.com/Eli6a/TinyPet/assets/48087333/4a6e2a5d-2be2-4eb5-9312-92df5c2fdb00)
+![image](https://github.com/Eli6a/TinyPet/assets/48087333/4fa48f90-0b00-4ba3-b533-41678d2a15e9)
+

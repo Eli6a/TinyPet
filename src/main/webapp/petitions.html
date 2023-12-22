@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Créer une pétition</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="C:\Users\Admin\Desktop\CoursM1\DonnéeMassive\Projet\style.css"> <!-- Add this line for your custom CSS -->
+        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+        <script src="https://unpkg.com/mithril/mithril.js"></script>
+    </head>
+    
+<body>
+    <div class="main-container">
+        <script>	
+        
+        var PetitionModel = {
+                    list: [
+                    {'title': 'Save the Rainforests',
+   'username': 'nature_lover',
+   'body': 'Help us protect the rainforests...',
+   'tags': ['environment', 'forests']},
+  {'title': 'More Bike Lanes',
+   'username': 'city_cyclist',
+   'body': 'We need safer bike lanes in the city...',
+   'tags': ['urban', 'cycling']},
+  {'title': 'Petition Title 3',
+   'username': 'user3',
+   'body': 'This is the body of petition 3.',
+   'tags': ['tag3', 'tag4']},
+  {'title': 'Petition Title 4',
+   'username': 'user4',
+   'body': 'This is the body of petition 4.',
+   'tags': ['tag4', 'tag5']},
+  {'title': 'Petition Title 5',
+   'username': 'user5',
+   'body': 'This is the body of petition 5.',
+   'tags': ['tag0', 'tag1']},
+  {'title': 'Petition Title 6',
+   'username': 'user6',
+   'body': 'This is the body of petition 6.',
+   'tags': ['tag1', 'tag2']},
+  {'title': 'Petition Title 7',
+   'username': 'user7',
+   'body': 'This is the body of petition 7.',
+   'tags': ['tag2', 'tag3']},
+  {'title': 'Petition Title 8',
+   'username': 'user8',
+   'body': 'This is the body of petition 8.',
+   'tags': ['tag3', 'tag4']},
+  {'title': 'Petition Title 9',
+   'username': 'user9',
+   'body': 'This is the body of petition 9.',
+   'tags': ['tag4', 'tag5']},
+  {'title': 'Petition Title 10',
+   'username': 'user10',
+   'body': 'This is the body of petition 10.',
+   'tags': ['tag0', 'tag1']},
+  {'title': 'Petition Title 11',
+   'username': 'user11',
+   'body': 'This is the body of petition 11.',
+   'tags': ['tag1', 'tag2']},
+  {'title': 'Petition Title 12',
+   'username': 'user12',
+   'body': 'This is the body of petition 12.',
+   'tags': ['tag2', 'tag3']},
+  {'title': 'Petition Title 13',
+   'username': 'user13',
+   'body': 'This is the body of petition 13.',
+   'tags': ['tag3', 'tag4']},
+  {'title': 'Petition Title 14',
+   'username': 'user14',
+   'body': 'This is the body of petition 14.',
+   'tags': ['tag4', 'tag5']},
+  {'title': 'Petition Title 15',
+   'username': 'user15',
+   'body': 'This is the body of petition 15.',
+   'tags': ['tag0', 'tag1']},
+  {'title': 'Petition Title 16',
+   'username': 'user16',
+   'body': 'This is the body of petition 16.',
+   'tags': ['tag1', 'tag2']},
+  {'title': 'Petition Title 17',
+   'username': 'user17',
+   'body': 'This is the body of petition 17.',
+   'tags': ['tag2', 'tag3']},
+  {'title': 'Petition Title 18',
+   'username': 'user18',
+   'body': 'This is the body of petition 18.',
+   'tags': ['tag3', 'tag4']},
+  {'title': 'Petition Title 19',
+   'username': 'user19',
+   'body': 'This is the body of petition 19.',
+   'tags': ['tag4', 'tag5']},
+  {'title': 'Petition Title 20',
+   'username': 'user20',
+   'body': 'This is the body of petition 20.',
+   'tags': ['tag0', 'tag1']},
+  {'title': 'Petition Title 21',
+   'username': 'user21',
+   'body': 'This is the body of petition 21.',
+   'tags': ['tag1', 'tag2']},
+  {'title': 'Petition Title 22',
+   'username': 'user22',
+   'body': 'This is the body of petition 22.',
+   'tags': ['tag2', 'tag3']},
+  {'title': 'Petition for Action 23',
+   'username': 'user200',
+   'body': 'We are petitioning to address issue 23 because...',
+   'tags': ['issue5', 'issue0']},
+  {'title': 'Petition Title 12',
+   'username': 'user12',
+   'body': 'This is the body of petition 12.',
+   'tags': ['tag2', 'tag3']},
+  {'title': 'Petition Title 12',
+   'username': 'user12',
+   'body': 'This is the body of petition 12.',
+   'tags': ['tag2', 'tag3']},
+  {'title': 'Petition Title 12',
+   'username': 'user12',
+   'body': 'This is the body of petition 12.',
+   'tags': ['tag2', 'tag3']},
+  {'title': 'Petition Title 12',
+   'username': 'user12',
+   'body': 'This is the body of petition 12.',
+   'tags': ['tag2', 'tag3']},
+  {'title': 'Petition Title 12',
+   'username': 'user12',
+   'body': 'This is the body of petition 12.',
+   'tags': ['tag2', 'tag3']},
+  {'title': 'Petition Title 12',
+   'username': 'user12',
+   'body': 'This is the body of petition 12.',
+   'tags': ['tag2', 'tag3']},
+  {'title': 'Petition Title 12',
+   'username': 'user12',
+   'body': 'This is the body of petition 12.',
+   'tags': ['tag2', 'tag3']}
+                    ]
+        };
+                
+                var Petition = {
+                    view: function(vnode) {
+                        var petition = vnode.attrs.petition;
+                        return m("div.petition", [
+                            m("h3", petition.title),
+                            m("p", { class: "username" }, `By: ${petition.username}`),
+                            m("p", { class: "body" }, petition.body),
+                            m("div.tags", petition.tags.map(tag => m("span.tag", tag)))
+                        ]);
+                    }
+                };
+                var PetitionsList = {
+                view: function() {
+                        return m("div.petitions-list", 
+                            PetitionModel.list.map(petition => m(Petition, { petition }))
+                        );
+                }
+                };
+
+                m.mount(document.body, PetitionsList);
+
+        </script>
+    </div>
+</body>
+</html>

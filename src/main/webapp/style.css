@@ -1,0 +1,111 @@
+/* Custom CSS to override Bootstrap styles */
+
+/* General Styling */
+body {
+    padding: 20px;
+}
+
+/* Header Styling */
+.header {
+    margin-bottom: 20px;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Form Inputs Styling */
+.form-inputs {
+    margin-bottom: 20px;
+}
+
+.input-field,
+.textarea-field {
+    margin-bottom: 15px;
+}
+
+.input.is-rounded,
+.textarea {
+    width: 100%;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Tags Section Styling */
+.tags-section {
+    margin-bottom: 20px;
+}
+
+.label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.input.is-rounded {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+/* Submit Section Styling */
+.submit-section {
+    text-align: center;
+}
+
+.button.is-link {
+    background-color: #007bff;
+    color: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button.is-link:hover {
+    background-color: #0056b3;
+}
+
+/*petition page*/
+
+.petitions-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.petition {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px;
+    width: 300px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.petition h3 {
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.username {
+    font-style: italic;
+    color: #666;
+}
+
+.body {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.tag {
+    display: inline-block;
+    background: #007bff;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 15px;
+    margin-right: 5px;
+    font-size: 0.8em;
+}

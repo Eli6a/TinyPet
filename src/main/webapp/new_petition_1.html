@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Créer une pétition</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="C:\Users\Admin\Desktop\CoursM1\DonnéeMassive\Projet\style.css"> <!-- Add this line for your custom CSS -->
+        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+        <script src="https://unpkg.com/mithril/mithril.js"></script>
+    </head>
+    
+<body>
+    <div class="main-container">
+        <script>	
+        
+        // Petition
+
+        var Petition={
+            petitionTitle : "New",
+            userName : "Moi",
+            body : "oeivzrjof zeofijzeo zfoeifzef",
+            tags : [],
+
+        save: function() {
+            console.log("saving...",Score.current)
+                    return m.request({
+                        method: "GET",
+                        url: "_ah/api/myApi/v1/petition/"+getPetitionTitle+"/"+getUserName+"/"+getBody+"/"+tags
+                    })
+                    .then(function(result) {
+                        console.log("got:",result)
+                    })
+        }
+        } 
+
+        var PetitionView = {
+            view: function() {
+                return m('div', [
+                    m('div', { class: 'header' }, [
+                        m('div', { class: 'subtitle' }, "Petition Details")
+                    ]),
+                    m('div', { class: 'form-inputs' }, [
+                        m('div', { class: 'input-field' }, [
+                            m("input[type=text][placeholder=Title]", {
+                                value: Petition.getPetitionTitle,
+                                class: 'input is-rounded',
+                                oninput: function(e) {
+                                    Petition.getPetitionTitle = e.target.value;
+                                },
+                            }),
+                        ]),
+                        m('div', { class: 'input-field' }, [
+                            m("input[type=text][placeholder=Username]", {
+                                value: Petition.getUserName,
+                                class: 'input is-rounded',
+                                oninput: function(e) {
+                                    Petition.getUserName = e.target.value;
+                                },
+                            }),
+                        ]),
+                        m('div', { class: 'textarea-field' }, [
+                            m("textarea[placeholder=Body]", {
+                                value: Petition.getBody,
+                                class: 'textarea',
+                                oninput: function(e) {
+                                    Petition.getBody = e.target.value;
+                                },
+                            }),
+                        ])
+                    ]),
+                    m('div', { class: 'tags-section' }, [
+                        m('label', { class: 'label' }, "Tags:"),
+                        Petition.tags.map(function(tag, index) {
+                            return m("input[type=text][placeholder=Tag]", {
+                                value: tag,
+                                class: 'input is-rounded',
+                                oninput: function(e) {
+                                    Petition.tags[index] = e.target.value;
+                                },
+                            });
+                        }),
+                        m("button", {
+                            class: 'button is-link',
+                            onclick: function(e) {
+                                Petition.tags.push(""); // Add a new element to the tags list
+                            },
+                        }, "Add Tag"),
+                    ]),
+                    m('div', { class: 'submit-section' }, [
+                        m('button', {
+                            class: 'button is-link',
+                            onclick: function(e) {
+                                // Add logic here to save or update the petition
+                                console.log('Petition details updated:', Petition);
+                            },
+                        }, "Save"),
+                    ]),
+                ]);
+            },
+        };
+
+        m.mount(document.body, PetitionView);
+
+        </script>
+    </div>
+</body>
+</html>

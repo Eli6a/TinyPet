@@ -234,4 +234,24 @@ public class ScoreEndpoint {
 		txn.commit();
 		return e;
 	}
+
+	@ApiMethod(name = "addPetition", httpMethod = HttpMethod.POST)
+	public Entity addPetition(Petition pet) {
+		Date date = new Date();
+
+		Entity e = new Entity("Petition", r.nextInt(8)+"_"+date);
+		e.setProperty("title", pet.title);
+		e.setProperty("url", pet.url);
+		e.setProperty("owner", pet.owner);
+		e.setProperty("body", pet.body);
+		e.setProperty("date", date);
+		e.setProperty("signature", 0);
+		e.setProperty("tags", pet.tags);
+
+		DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+		Transaction txn = datastore.beginTransaction();
+		datastore.put(e);
+		txn.commit();
+		return e;
+	}
 }
